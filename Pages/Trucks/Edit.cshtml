@@ -1,0 +1,130 @@
+﻿@page
+@model MyBuisnessVTCO.Pages.Trucks.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Trucks</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Trucks.ID" />
+            <div class="form-group">
+                <label asp-for="Trucks.OM" class="control-label"></label>
+                <input asp-for="Trucks.OM" class="form-control" />
+                <span asp-validation-for="Trucks.OM" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Trucks.NumChassis" class="control-label"></label>
+                <input asp-for="Trucks.NumChassis" class="form-control" />
+                <span asp-validation-for="Trucks.NumChassis" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Trucks.V_Operation" class="control-label"></label>
+                <input asp-for="Trucks.V_Operation" class="form-control" />
+                <span asp-validation-for="Trucks.V_Operation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Trucks.V_Description" class="control-label"></label>
+                <input asp-for="Trucks.V_Description" class="form-control" />
+                <span asp-validation-for="Trucks.V_Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Trucks.V_Gamme" class="control-label"></label>
+                <input asp-for="Trucks.V_Gamme" class="form-control" />
+                <span asp-validation-for="Trucks.V_Gamme" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Trucks.V_Modele" class="control-label"></label>
+                <input asp-for="Trucks.V_Modele" class="form-control" />
+                <span asp-validation-for="Trucks.V_Modele" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Trucks.V_Type" class="control-label"></label>
+                <input asp-for="Trucks.V_Type" class="form-control" />
+                <span asp-validation-for="Trucks.V_Type" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Trucks.V_Moteur" class="control-label"></label>
+                <input asp-for="Trucks.V_Moteur" class="form-control" />
+                <span asp-validation-for="Trucks.V_Moteur" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Trucks.C_Type" class="control-label"></label>
+                <input asp-for="Trucks.C_Type" class="form-control" />
+                <span asp-validation-for="Trucks.C_Type" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Trucks.C_Marque" class="control-label"></label>
+                <input asp-for="Trucks.C_Marque" class="form-control" />
+                <span asp-validation-for="Trucks.C_Marque" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Trucks.C_Description" class="control-label"></label>
+                <input asp-for="Trucks.C_Description" class="form-control" />
+                <span asp-validation-for="Trucks.C_Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Trucks.D_Chassis" class="control-label"></label>
+                <input asp-for="Trucks.D_Chassis" class="form-control" />
+                <span asp-validation-for="Trucks.D_Chassis" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Trucks.D_Carrosserie" class="control-label"></label>
+                <input asp-for="Trucks.D_Carrosserie" class="form-control" />
+                <span asp-validation-for="Trucks.D_Carrosserie" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Trucks.A_Kilometrage" class="control-label"></label>
+                <input asp-for="Trucks.A_Kilometrage" class="form-control" />
+                <span asp-validation-for="Trucks.A_Kilometrage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Trucks.A_Immatriculation" class="control-label"></label>
+                <input asp-for="Trucks.A_Immatriculation" class="form-control" />
+                <span asp-validation-for="Trucks.A_Immatriculation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Trucks.A_Localisation" class="control-label"></label>
+                <input asp-for="Trucks.A_Localisation" class="form-control" />
+                <span asp-validation-for="Trucks.A_Localisation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Trucks.F_PrixMiniClient" class="control-label"></label>
+                <input asp-for="Trucks.F_PrixMiniClient" class="form-control" />
+                <span asp-validation-for="Trucks.F_PrixMiniClient" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Trucks.F_ComForfait" class="control-label"></label>
+                <input asp-for="Trucks.F_ComForfait" class="form-control" />
+                <span asp-validation-for="Trucks.F_ComForfait" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Trucks.F_VNC" class="control-label"></label>
+                <input asp-for="Trucks.F_VNC" class="form-control" />
+                <span asp-validation-for="Trucks.F_VNC" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Trucks.ReservationDate" class="control-label"></label>
+                <input asp-for="Trucks.ReservationDate" class="form-control" />
+                <span asp-validation-for="Trucks.ReservationDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

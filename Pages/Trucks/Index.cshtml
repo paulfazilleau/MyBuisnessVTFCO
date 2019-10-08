@@ -1,0 +1,44 @@
+﻿@page
+@model MyBuisnessVTCO.Pages.Trucks.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Trucks)
+        {
+            <tr>
+                <td>
+                    <div class="col col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <div class="col-xs-7 col-sm-12 col-xs-push-5 col-sm-push-0 p-0">
+                            <div class="card_header">
+                                <div class="textRight">@Html.DisplayFor(modelItem => item.OM)</div>
+                                <div class="textLeft">@Html.DisplayFor(modelItem => item.A_Immatriculation) </div>
+                                <div class="operation">@Html.DisplayFor(modelItem => item.V_Operation)</div>
+                            </div>
+                            <div class="card_infos_sub visible-xs-block">
+                                <div>@Html.DisplayFor(modelItem => item.V_Moteur)</div>
+                                <div>@Html.DisplayFor(modelItem => item.V_Description)</div>
+                                <div>@Html.DisplayFor(modelItem => item.V_Type)</div>
+                                <div>@Html.DisplayFor(modelItem => item.C_Description)</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+    </table>
