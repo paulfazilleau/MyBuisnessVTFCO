@@ -21,39 +21,61 @@ namespace MyBuisnessVTCO.Pages.Trucks
 
         [BindProperty]
         public Truck Trucks { get; set; }
+        public string ErrorMessage { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(int? id, bool? saveChangesError = false)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            Trucks = await _context.Trucks.FirstOrDefaultAsync(m => m.ID == id);
+            Trucks = await _context.Trucks
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.ID == id);
 
             if (Trucks == null)
             {
                 return NotFound();
             }
+
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ErrorMessage = "Delete failed. Try again";
+            }
+
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id)
+        public async Task<IActionResult> OnPostAsync(int? id, bool? saveChangesError = false)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ErrorMessage = "Delete failed. Try again";
+            }
+
             Trucks = await _context.Trucks.FindAsync(id);
 
-            if (Trucks != null)
+            if (Trucks == null)
+            {
+                return NotFound();
+            }
+
+            try
             {
                 _context.Trucks.Remove(Trucks);
                 await _context.SaveChangesAsync();
+                return RedirectToPage("./Index");
             }
-
-            return RedirectToPage("./Index");
+            catch (Exception)
+            {
+                return RedirectToAction("./Delete", new { id, saveChangesError = true });
+            }
         }
     }
 }

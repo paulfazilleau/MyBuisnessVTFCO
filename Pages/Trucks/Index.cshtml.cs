@@ -19,11 +19,55 @@ namespace MyBuisnessVTCO.Pages.Trucks
             _context = context;
         }
 
-        public IList<Truck> Trucks { get;set; }
+        public string OMSort { get; set; }
+        public string ImmatSort { get; set; }
+        public string CurrentFilter { get; set; }
+        public string CurrentSort { get; set; }
 
-        public async Task OnGetAsync()
+        public PaginatedList<Truck> Trucks { get; set; }
+        public async Task OnGetAsync(string sortOrder,
+            string currentFilter, string searchString, int? pageIndex)
         {
-            Trucks = await _context.Trucks.ToListAsync();
+            CurrentSort = sortOrder;
+            OMSort = String.IsNullOrEmpty(sortOrder) ? "OM_desc" : "";
+            ImmatSort = sortOrder == "Immatriculation" ? "immatriculation_desc" : "Immatriculation";
+            if (searchString != null)
+            {
+                pageIndex = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            CurrentFilter = searchString;
+
+            IQueryable<Truck> trucksIQ = from s in _context.Trucks
+                                         select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                trucksIQ = trucksIQ.Where(s => s.OM.Contains(searchString) || s.A_Immatriculation.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "OM":
+                    trucksIQ = trucksIQ.OrderByDescending(s => s.OM);
+                    break;
+                case "Immatriculation":
+                    trucksIQ = trucksIQ.OrderBy(s => s.A_Immatriculation);
+                    break;
+                case "immatriculation_desc":
+                    trucksIQ = trucksIQ.OrderByDescending(s => s.A_Immatriculation);
+                    break;
+                default:
+                    trucksIQ = trucksIQ.OrderBy(s => s.OM);
+                    break;
+            }
+
+            int pageSize = 3;
+            Trucks = await PaginatedList<Truck>.CreateAsync(
+                trucksIQ.AsNoTracking(), pageIndex ?? 1, pageSize);
         }
     }
 }
