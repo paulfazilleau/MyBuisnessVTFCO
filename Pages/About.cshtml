@@ -1,0 +1,31 @@
+﻿@page
+@model MyBuisnessVTCO.Pages.AboutModel
+
+@{
+    ViewData["Title"] = "Truck Reservation Statistics";
+}
+
+<h2>Trucks Reservation Statistics</h2>
+
+<table>
+    <tr>
+        <th>
+            Reservation Date
+        </th>
+        <th>
+            Trucks
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Trucks)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReservationDate)
+            </td>
+            <td>
+                @item.TruckCount
+            </td>
+        </tr>
+    }
+</table>

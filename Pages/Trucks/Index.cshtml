@@ -1,0 +1,103 @@
+﻿@page
+@model MyBuisnessVTCO.Pages.Trucks.IndexModel
+
+@{
+    ViewData["Title"] = "Trucks";
+}
+
+<h2>Trucks</h2>
+
+<AuthorizeView>
+    <Authorized>
+        <p>You can only see this content if you're authenticated.</p>
+
+
+        <p>
+            <a asp-page="Create">Create New</a>
+        </p>
+
+        <form asp-page="./Index" method="get">
+            <div class="form-actions no-color">
+                <p>
+                    Find by OM:
+                    <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+                    <input type="submit" value="Search" class="btn btn-primary" /> |
+                    <a asp-page="./Index">Back to full List</a>
+                </p>
+            </div>
+        </form>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Sort by :</th>
+                    <th>
+                        <a asp-page="./Index" asp-route-sortOrder="@Model.OMSort"
+                           asp-route-currentFilter="@Model.CurrentFilter">
+                            @Html.DisplayNameFor(model => model.Trucks[0].OM)
+                        </a>
+                    </th>
+                    <th>
+                        <a asp-page="./Index" asp-route-sortOrder="@Model.ImmatSort"
+                           asp-route-currentFilter="@Model.CurrentFilter">
+                            @Html.DisplayNameFor(model => model.Trucks[0].A_Immatriculation)
+                        </a>
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Trucks)
+                {
+                    <tr>
+                        <td>
+                            <div class="col col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                                <div class="col-xs-7 col-sm-12 col-xs-push-5 col-sm-push-0 p-0">
+                                    <div class="card_header">
+                                        <div class="textRight">@Html.DisplayFor(modelItem => item.OM)</div>
+                                        <div class="textLeft">@Html.DisplayFor(modelItem => item.A_Immatriculation) </div>
+                                        <div class="operation">@Html.DisplayFor(modelItem => item.V_Operation)</div>
+                                    </div>
+                                    <div class="card_infos_sub visible-xs-block">
+                                        <div>@Html.DisplayFor(modelItem => item.V_Moteur)</div>
+                                        <div>@Html.DisplayFor(modelItem => item.V_Description)</div>
+                                        <div>@Html.DisplayFor(modelItem => item.V_Type)</div>
+                                        <div>@Html.DisplayFor(modelItem => item.C_Description)</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                            <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                            <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        @{
+            var prevDisabled = !Model.Trucks.HasPreviousPage ? "disabled" : "";
+            var nextDisabled = !Model.Trucks.HasNextPage ? "disabled" : "";
+        }
+
+        <a asp-page="./Index"
+           asp-route-sortOrder="@Model.CurrentSort"
+           asp-route-pageIndex="@(Model.Trucks.PageIndex - 1)"
+           asp-route-currentFilter="@Model.CurrentFilter"
+           class="btn btn-primary @prevDisabled">
+            Previous
+        </a>
+        <a asp-page="./Index"
+           asp-route-sortOrder="@Model.CurrentSort"
+           asp-route-pageIndex="@(Model.Trucks.PageIndex + 1)"
+           asp-route-currentFilter="@Model.CurrentFilter"
+           class="btn btn-primary @nextDisabled">
+            Next
+        </a>
+
+    </Authorized>
+    <NotAuthorized>
+        <h1>Authentication Failure!</h1>
+        <p>You're not signed in.</p>
+    </NotAuthorized>
+</AuthorizeView>
